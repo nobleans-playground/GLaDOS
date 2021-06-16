@@ -1,3 +1,10 @@
+# install webots
+sudo apt install ros-$ROS_DISTRO-webots-ros2
+# make sure you are in point 4. of https://github.com/cyberbotics/webots_ros2/wiki/Build-and-Install
+# Now, if Webots is not installed (or not the right version), when launching the node, a pop-up window will ask the user if he wants to install Webots, if he says yes, the tarball is downloaded and installed in $HOME/.ros/webots$VERSION, I have checked but did not found any recommended location to save such files (some other packages such RVIz2 are creating their own hidden folder in the home directory).
+ros2 launch webots_ros2_demos armed_robots.launch.py
+
+# create
 ros2 pkg create --build-type ament_cmake <package_name>
 ros2 pkg create --build-type ament_python <package_name>
 
@@ -22,7 +29,5 @@ colcon_cd
 # TODO
 currently working on:
 - box on wheels
-    - python launch files
-    - ament_cmake (https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html)
-    - tutorial source files: https://github.com/cyberbotics/webots_ros2/tree/foxy/webots_ros2_turtlebot
-    - pubsub tutorial -> launch
+    - ament_cmake (https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html) or colcon build?
+    - pubsub tutorial -> python launch file
