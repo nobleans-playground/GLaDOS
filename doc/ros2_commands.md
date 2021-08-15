@@ -14,6 +14,7 @@ colcon build --packages-select cpp_pubsub
 . install/setup.bash
 ros2 run cpp_pubsub talker
 ros2 run cpp_pubsub listener
+ros2 launch my_package main.launch.py
 
 # debug
 ros2 run tf2_ros static_transform_publisher 1 2 3 0.5 0.1 -1.0 foo bar
@@ -30,4 +31,4 @@ colcon_cd
 currently working on:
 - box on wheels
     - ament_cmake (https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html) or colcon build?
-    - pubsub tutorial -> python launch file
+    - pubsub tutorial -> python launch file -> 2 forms of python launch file, check both and understand them (see main.launch.py)
