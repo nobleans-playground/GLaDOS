@@ -14,6 +14,8 @@ Now, if Webots is not installed (or not the right version), when launching the n
 `ros2 pkg create --build-type ament_python <package_name>`
 
 # Build and Run
+`colcon` is a ROS build tool aiming to ease building a set of packages, testing them, etc. `ament_cmake` is the underlying build system for a single package.
+
 `colcon build`\
 `colcon build --packages-select cpp_pubsub`\
 `. install/setup.bash`\
