@@ -41,10 +41,22 @@ include_directories(include)
 # ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
-# install(PROGRAMS
-#   scripts/py_node.py
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  scripts/turtlebot_driver.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install launch files.
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+# Install world files.
+install(DIRECTORY
+  worlds
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

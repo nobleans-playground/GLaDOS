@@ -27,7 +27,7 @@ from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
-    package_dir = get_package_share_directory('webots_ros2_turtlebot')
+    package_dir = get_package_share_directory('glados_simulation')
     world = LaunchConfiguration('world')
 
     webots = IncludeLaunchDescription(
@@ -35,8 +35,8 @@ def generate_launch_description():
             os.path.join(get_package_share_directory('webots_ros2_core'), 'launch', 'robot_launch.py')
         ),
         launch_arguments=[
-            ('package', 'webots_ros2_turtlebot'),
-            ('executable', 'turtlebot_driver'),
+            ('package', 'glados_simulation'),
+            ('executable', 'turtlebot_driver.py'),
             ('world', PathJoinSubstitution([package_dir, 'worlds', world])),
         ]
     )
@@ -45,7 +45,10 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'world',
             default_value='turtlebot3_burger_example.wbt',
-            description='Choose one of the world files from `/webots_ros2_turtlebot/world` directory'
+            description='Choose one of the world files from `/glados_simulation/worlds` directory'
         ),
         webots
     ])
+
+# generate_launch_description()
+# print('test')
