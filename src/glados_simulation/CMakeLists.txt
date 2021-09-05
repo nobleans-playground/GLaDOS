@@ -52,15 +52,11 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}/
 )
 
-# Install world files.
+# Install Webots files.
 install(DIRECTORY
   worlds
-  DESTINATION share/${PROJECT_NAME}/
-)
-
-# Install proto files.
-install(DIRECTORY
   protos
+  resource
   DESTINATION share/${PROJECT_NAME}/
 )
 

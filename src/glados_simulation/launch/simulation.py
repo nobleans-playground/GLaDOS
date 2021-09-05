@@ -49,6 +49,3 @@ def generate_launch_description():
         ),
         webots
     ])
-
-# generate_launch_description()
-# print('test')
