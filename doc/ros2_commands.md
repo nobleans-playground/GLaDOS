@@ -5,6 +5,9 @@ make sure you are in point 4. of https://github.com/cyberbotics/webots_ros2/wiki
 Now, if Webots is not installed (or not the right version), when launching the node, a pop-up window will ask the user if he wants to install Webots, if he says yes, the tarball is downloaded and installed in $HOME/.ros/webots$VERSION, I have checked but did not found any recommended location to save such files (some other packages such RVIz2 are creating their own hidden folder in the home directory).\
 `ros2 launch webots_ros2_demos armed_robots.launch.py`
 
+# Tutorials
+See https://github.com/ros2/examples (or locally: `~ros2_example_ws/src/examples`) for a whole elaborate set of examples from the https://index.ros.org/doc/ros2/Tutorials/ page.
+
 # Cheat Sheets
 - https://github.com/ubuntu-robotics/ros2_cheats_sheet/blob/master/cli/cli_cheats_sheet.pdf
 - https://gist.github.com/kscottz/ef8a62700ef6ae5e04a0e91af5453ccd
