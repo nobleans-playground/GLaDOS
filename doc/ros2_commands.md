@@ -37,10 +37,3 @@ source first?
 colcon_cd --set
 colcon list
 colcon_cd
-
-# TODO
-currently working on:
-- ament_cmake (https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html) or colcon build?
-- pubsub tutorial -> python launch file -> 2 forms of python launch file, check both and understand them (see main.launch.py)
-- box on wheels
-
