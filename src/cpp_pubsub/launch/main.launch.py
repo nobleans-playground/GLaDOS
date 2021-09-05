@@ -8,11 +8,11 @@ def generate_launch_description():
             namespace='talker_ns',
             executable='talker',
             name='talker_name',
-            output={
-                'stdout': 'screen',
-                'stderr': 'screen',
-            },
-            emulate_tty=True
+            # output={
+            #     'stdout': 'screen',
+            #     'stderr': 'screen',
+            # },
+            # emulate_tty=True
         ),
         Node(
             package='cpp_pubsub',
@@ -22,11 +22,11 @@ def generate_launch_description():
             remappings=[
                 ('/listener_ns/topic', '/talker_ns/topic'),
             ],
-            output={
-                'stdout': 'screen',
-                'stderr': 'screen',
-            },
-            emulate_tty=True
+            # output={
+            #     'stdout': 'screen',
+            #     'stderr': 'screen',
+            # },
+            # emulate_tty=True
         ),
     ])
 
