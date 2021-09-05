@@ -6,7 +6,8 @@ Now, if Webots is not installed (or not the right version), when launching the n
 `ros2 launch webots_ros2_demos armed_robots.launch.py`
 
 # Tutorials
-See https://github.com/ros2/examples (or locally: `~ros2_example_ws/src/examples`) for a whole elaborate set of examples from the https://index.ros.org/doc/ros2/Tutorials/ page.
+- See https://github.com/ros2/examples (or locally: `~ros2_example_ws/src/examples`) for a whole elaborate set of examples from the https://index.ros.org/doc/ros2/Tutorials/ page.
+- Webots ROS2 library: https://github.com/cyberbotics/webots_ros2/tree/foxy
 
 # Cheat Sheets
 - https://github.com/ubuntu-robotics/ros2_cheats_sheet/blob/master/cli/cli_cheats_sheet.pdf
