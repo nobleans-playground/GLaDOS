@@ -9,7 +9,7 @@ More resources: https://www.cyberbotics.com/doc/guide/installation-procedure
 `ros2 launch webots_ros2_demos armed_robots.launch.py`
 
 # Tutorials
-- See https://github.com/ros2/examples (or locally: `~ros2_example_ws/src/examples`) for a whole elaborate set of examples from the https://index.ros.org/doc/ros2/Tutorials/ page.
+- See https://github.com/ros2/examples (or locally: `~/ros2_example_ws/src/examples`) for a whole elaborate set of examples from the https://index.ros.org/doc/ros2/Tutorials/ page.
 - Webots ROS2 library: https://github.com/cyberbotics/webots_ros2/tree/foxy
 
 # Cheat Sheets
@@ -29,6 +29,7 @@ More resources: https://www.cyberbotics.com/doc/guide/installation-procedure
 `ros2 run cpp_pubsub talker`\
 `ros2 run cpp_pubsub listener`\
 `ros2 launch my_package main.launch.py`
+`ros2 run teleop_twist_keyboard teleop_twist_keyboard`
 
 # Debug
 `ros2 node list`\
