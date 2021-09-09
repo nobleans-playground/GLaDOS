@@ -42,7 +42,7 @@ include_directories(include)
 
 # Install Python executables
 install(PROGRAMS
-  scripts/turtlebot_driver.py
+  scripts/glados_driver.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -57,6 +57,7 @@ install(DIRECTORY
   worlds
   protos
   resource
+  param
   DESTINATION share/${PROJECT_NAME}/
 )
 

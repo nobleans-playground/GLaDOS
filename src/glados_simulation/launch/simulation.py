@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Launch Webots TurtleBot3 Burger driver."""
+"""Launch Webots GLaDOS Simulation."""
 
 import os
 import launch
@@ -32,10 +32,74 @@ from webots_ros2_core.webots_launcher import WebotsLauncher
 
 from ament_index_python.packages import get_package_share_directory
 
+package_path = get_package_share_directory('glados_simulation')
+
+ARGUMENTS = [
+    DeclareLaunchArgument(
+        'namespace',
+        default_value='glados',
+        description=''
+    ),
+    DeclareLaunchArgument(
+        'synchronization',
+        default_value='False',
+        description='If `False` robot.step() will be automatically called.'
+    ),
+    DeclareLaunchArgument(
+        'package',
+        default_value='glados_simulation',
+        description='The Package in which the node executable can be found.'
+    ),
+    DeclareLaunchArgument(
+        'executable',
+        default_value='glados_driver.py',
+        description='The name of the executable to find if a package is provided or otherwise a path to the executable to run.'
+    ),
+    DeclareLaunchArgument(
+        'world',
+        default_value=os.path.join(package_path, 'worlds', 'turtlebot3_burger_example.wbt'),
+        description='Choose one of the world files from `/glados_simulation/worlds` directory'
+    ),
+    DeclareLaunchArgument(
+        'gui',
+        default_value='True',
+        description='Whether to start GUI or not.'
+    ),
+    DeclareLaunchArgument(
+        'mode',
+        default_value='realtime',
+        description='Choose the startup mode (it must be either `pause`, `realtime`, `run` or `fast`).'
+    ),
+    DeclareLaunchArgument(
+        'publish_tf',
+        default_value='True',
+        description='Whether to publish transforms (tf)'
+    ),
+    DeclareLaunchArgument(
+        'node_parameters',
+        description='Path to ROS parameters file that will be passed to the robot node',
+        default_value=os.path.join(package_path, 'param', 'ros2control.yml')
+    ),
+    DeclareLaunchArgument(
+        'robot_name',
+        description='The name of the robot (has to be the same as in Webots)',
+        default_value=''
+    ),
+    DeclareLaunchArgument(
+        'node_name',
+        description='The name of the ROS node that interacts with Webots',
+        default_value='webots_driver'
+    ),
+    DeclareLaunchArgument(
+        'use_sim_time',
+        description='Whether to use the simulation (Webots) time',
+        default_value='True'
+    )
+]
+
 
 def generate_launch_description():
-    NAMESPACE = 'glados'
-    package_dir = get_package_share_directory('glados_simulation')
+    namespace = LaunchConfiguration('namespace')
 
     package = LaunchConfiguration('package')
     executable = LaunchConfiguration('executable')
@@ -44,18 +108,17 @@ def generate_launch_description():
     publish_tf = LaunchConfiguration('publish_tf')
     robot_name = LaunchConfiguration('robot_name')
     node_name = LaunchConfiguration('node_name')
+    use_sim_time = LaunchConfiguration('use_sim_time')
 
     world = LaunchConfiguration('world')
+    gui = LaunchConfiguration('gui')
+    mode = LaunchConfiguration('mode')
 
-    webots = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('webots_ros2_core'), 'launch', 'robot_launch.py')
-        ),
-        launch_arguments=[
-            ('package', 'glados_simulation'),
-            ('executable', 'turtlebot_driver.py'),
-            ('world', PathJoinSubstitution([package_dir, 'worlds', world])),
-        ]
+    # Webots
+    webots = WebotsLauncher(
+        world=world,
+        mode=mode,
+        gui=gui
     )
 
     # Driver node
@@ -88,12 +151,7 @@ def generate_launch_description():
     )
 
 
-    return LaunchDescription([
-        DeclareLaunchArgument(
-            'world',
-            default_value='turtlebot3_burger_example.wbt',
-            description='Choose one of the world files from `/glados_simulation/worlds` directory'
-        ),
+    return LaunchDescription(ARGUMENTS + [
         webots,
         controller,
         robot_state_publisher,
