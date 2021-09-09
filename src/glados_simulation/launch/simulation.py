@@ -150,7 +150,6 @@ def generate_launch_description():
         condition=launch.conditions.IfCondition(publish_tf)
     )
 
-
     return LaunchDescription(ARGUMENTS + [
         webots,
         controller,
