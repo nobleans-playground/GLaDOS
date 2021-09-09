@@ -35,11 +35,15 @@ More resources: https://www.cyberbotics.com/doc/guide/installation-procedure
 `ros2 node list`\
 `ros2 topic list`\
 `ros2 topic <command> <topic>`\
+
 `ros2 run rqt_gui rqt_gui`\
 `ros2 run rqt_graph rqt_graph`\
+
+tf_tree or tf2_tree doesn't seem to be available for ROS2 foxy (https://index.ros.org/r/rqt_tf_tree/#foxy and https://answers.ros.org/question/375754/ros2-foxy-rqt_tf_tree/). https://github.com/clydemcqueen/tf_monitor could be a solution.\
 `ros2 run tf2_ros static_transform_publisher 1 2 3 0.5 0.1 -1.0 foo bar`\
 `ros2 run tf2_ros tf2_echo foo bar`\
 `ros2 run tf2_tools view_frames.py`\
+
 `ros2 interface list`\
 `ros2 doctor`
 
