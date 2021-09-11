@@ -7,7 +7,7 @@
   <xacro:property name="body_width" value="0.050" />
   <xacro:property name="body_length" value="0.035" />
 
-  <gazebo reference="glados_body">
+  <gazebo reference="base_link">
     <material>Gazebo/White</material>
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
@@ -25,7 +25,7 @@
     <mu2>0.84</mu2>
   </gazebo>
 
-  <link name="glados_body">
+  <link name="base_link">
     <visual>
       <geometry>
         <box size="${body_length} ${body_width} ${body_height}"/>
@@ -83,7 +83,7 @@
   </link>
 
   <joint name="jointL" type="continuous">
-    <parent link="glados_body"/>
+    <parent link="base_link"/>
     <child link="wheelL"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 ${body_width/2 + wheel_width/2} -${body_height/2 - 0.01}" rpy="${pi/2} 0 0" />
@@ -91,7 +91,7 @@
   </joint>
 
   <joint name="jointR" type="continuous">
-    <parent link="glados_body"/>
+    <parent link="base_link"/>
     <child link="wheelR"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 -${body_width/2 + wheel_width/2} -${body_height/2 - 0.01}" rpy="${pi/2} 0 0" />
