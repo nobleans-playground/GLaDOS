@@ -44,6 +44,8 @@ tf_tree or tf2_tree doesn't seem to be available for ROS2 foxy (https://index.ro
 `ros2 run tf2_ros tf2_echo foo bar`\
 `ros2 run tf2_tools view_frames.py`\
 
+`ros2 run rviz2 rviz2`\
+
 `ros2 interface list`\
 `ros2 doctor`
 
@@ -52,3 +54,6 @@ No auto-complete even with supporting package. (source first?)\
 `colcon_cd --set`\
 `colcon list`\
 `colcon_cd`
+
+# Limit ROS2 to localhost only (turns off automatic node network discovery)
+Add to ~/.bashrc: `export ROS_LOCALHOST_ONLY=1`
