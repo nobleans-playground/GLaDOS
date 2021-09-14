@@ -97,8 +97,15 @@ ARGUMENTS = [
     )
 ]
 
+def get_share_file(package_name, file_name):
+    return os.path.join(get_package_share_directory(package_name), file_name)
 
 def generate_launch_description():
+    base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
+    urdf_path = os.path.join(base_path, 'urdf')
+    xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
+
+
     namespace = LaunchConfiguration('namespace')
 
     package = LaunchConfiguration('package')
@@ -139,7 +146,7 @@ def generate_launch_description():
     )
 
     # Robot state publisher
-    robot_state_publisher = Node(
+    robot_state_publisher2 = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
@@ -150,10 +157,21 @@ def generate_launch_description():
         condition=launch.conditions.IfCondition(publish_tf)
     )
 
+    robot_state_publisher_launch_file_path = get_share_file('glados_description', 'launch/description.launch.py')
+    robot_state_publisher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(robot_state_publisher_launch_file_path),
+        launch_arguments={
+            'rviz': 'False',
+            'use_sim_time': use_sim_time
+        }.items()
+    )
+
+
     return LaunchDescription(ARGUMENTS + [
         webots,
         controller,
         robot_state_publisher,
+        robot_state_publisher2,
 
         # Shutdown launch when Webots exits.
         RegisterEventHandler(

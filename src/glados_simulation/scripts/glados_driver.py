@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""ROS2 TurtleBot3 Burger driver."""
+"""ROS2 Glados driver."""
 
 import rclpy
 from webots_ros2_core.webots_differential_drive_node import WebotsDifferentialDriveNode

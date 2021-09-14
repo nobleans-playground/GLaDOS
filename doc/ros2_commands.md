@@ -32,6 +32,8 @@ More resources: https://www.cyberbotics.com/doc/guide/installation-procedure
 `ros2 run teleop_twist_keyboard teleop_twist_keyboard`
 
 # Debug
+`ros2 daemon status`
+
 `ros2 node list`\
 `ros2 topic list`\
 `ros2 topic <command> <topic>`\

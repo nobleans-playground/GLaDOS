@@ -64,17 +64,17 @@ def generate_launch_description():
     joint_state_publisher = LaunchConfiguration('joint_state_publisher')
     use_sim_time = LaunchConfiguration('use_sim_time')
 
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'robot_description': Command(['xacro ', xacro_file]),
-            # 'robot_description': robot_description_xml,
-            'use_sim_time': use_sim_time
-        }],
-        # condition=launch.conditions.IfCondition(publish_tf)
-    )
+    # robot_state_publisher = Node(
+    #     package='robot_state_publisher',
+    #     executable='robot_state_publisher',
+    #     output='screen',
+    #     parameters=[{
+    #         'robot_description': Command(['xacro ', xacro_file]),
+    #         # 'robot_description': robot_description_xml,
+    #         'use_sim_time': use_sim_time
+    #     }],
+    #     # condition=launch.conditions.IfCondition(publish_tf)
+    # )
 
     static_transform_publisher_odom = Node(
         package = "tf2_ros",
@@ -88,22 +88,23 @@ def generate_launch_description():
         arguments = ["0", "0", "0", "0", "0", "0", "odom", "base_link"]
     )
 
-    joint_state_publisher = Node(
-        package = 'joint_state_publisher',
-        executable = 'joint_state_publisher'
-    )
+    # joint_state_publisher = Node(
+    #     package = 'joint_state_publisher',
+    #     executable = 'joint_state_publisher'
+    # )
 
     rviz = Node(
         package='rviz2',
         executable='rviz2',
         output='screen',
-        arguments=['-d', str(rviz_file)]
+        arguments=['-d', str(rviz_file)],
+        condition=launch.conditions.IfCondition(rviz)
     )
 
     return LaunchDescription(ARGUMENTS + [
-        robot_state_publisher,
+        # robot_state_publisher,
         static_transform_publisher_odom,
         static_transform_publisher_base_link,
-        joint_state_publisher,
+        # joint_state_publisher,
         rviz
     ])
