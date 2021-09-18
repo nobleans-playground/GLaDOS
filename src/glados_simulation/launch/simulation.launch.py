@@ -57,7 +57,7 @@ ARGUMENTS = [
     ),
     DeclareLaunchArgument(
         'world',
-        default_value=os.path.join(package_path, 'worlds', 'turtlebot3_burger_example.wbt'),
+        default_value=os.path.join(package_path, 'worlds', 'glados.wbt'),
         description='Choose one of the world files from `/glados_simulation/worlds` directory'
     ),
     DeclareLaunchArgument(
@@ -170,7 +170,7 @@ def generate_launch_description():
 
     return LaunchDescription(ARGUMENTS + [
         webots,
-        # controller,
+        controller,
         robot_state_publisher,
         glados_description,
 
