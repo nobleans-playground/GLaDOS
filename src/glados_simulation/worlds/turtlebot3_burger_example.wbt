@@ -8,27 +8,27 @@ WorldInfo {
 Viewpoint {
   orientation -0.1500994671353544 -0.4810853207937876 -0.8637285824160397 3.5119475446104667
   position 9.974034902718383 6.242698326848728 4.5715004345304
-  follow "TurtleBot3Burger:LDS-01"
+  # follow "TurtleBot3Burger_test:LDS-01"
 }
 TexturedBackground {
   texture "empty_office"
   skybox FALSE
 }
-TurtleBot3Burger_enu {
+glados {
   translation 6.35236 4.22115e-06 0.00614238
   rotation 0.0019998820104419734 0.9669429520486941 0.2549849563313516 0.018
   controller "<extern>"
   controllerArgs [
     ""
   ]
-  extensionSlot [
-    InertialUnit {
-      rotation 0 1 0 3.14
-      name "inertial_unit"
-    }
-    RobotisLds01 {
-    }
-  ]
+  # extensionSlot [
+  #   InertialUnit {
+  #     rotation 0 1 0 3.14
+  #     name "inertial_unit"
+  #   }
+  #   RobotisLds01 {
+  #   }
+  # ]
 }
 PottedTree {
   translation 7 -4 0

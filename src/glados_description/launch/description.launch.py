@@ -37,9 +37,10 @@ def generate_launch_description():
 
     base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
     urdf_path = os.path.join(base_path, 'urdf')
+    proto_path = os.path.join(base_path, 'protos')
     xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
     urdf_file = os.path.join(urdf_path, 'glados.urdf')
-    proto_file = os.path.join(urdf_path, 'glados.proto')
+    proto_file = os.path.join(proto_path, 'glados.proto')
     rviz_file = os.path.join(base_path, 'config', 'default.rviz')
     assert os.path.exists(xacro_file), "glados.urdf.xacro doesn't exist in "+str(urdf_path)
 

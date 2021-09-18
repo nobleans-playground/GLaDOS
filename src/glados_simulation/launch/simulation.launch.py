@@ -146,7 +146,7 @@ def generate_launch_description():
     )
 
     # Robot state publisher
-    robot_state_publisher2 = Node(
+    robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
@@ -157,9 +157,10 @@ def generate_launch_description():
         condition=launch.conditions.IfCondition(publish_tf)
     )
 
-    robot_state_publisher_launch_file_path = get_share_file('glados_description', 'launch/description.launch.py')
-    robot_state_publisher = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(robot_state_publisher_launch_file_path),
+    # Execute/Import glados_description launch file
+    glados_description_launch_file_path = get_share_file('glados_description', 'launch/description.launch.py')
+    glados_description = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(glados_description_launch_file_path),
         launch_arguments={
             'rviz': 'False',
             'use_sim_time': use_sim_time
@@ -169,9 +170,9 @@ def generate_launch_description():
 
     return LaunchDescription(ARGUMENTS + [
         webots,
-        controller,
+        # controller,
         robot_state_publisher,
-        robot_state_publisher2,
+        glados_description,
 
         # Shutdown launch when Webots exits.
         RegisterEventHandler(
