@@ -30,8 +30,8 @@ class GladosDriver(WebotsDifferentialDriveNode):
             right_encoder='jointR_sensor',
             right_joint='jointR',
             robot_base_frame='base_link',
-            wheel_distance=0.160,
-            wheel_radius=0.033
+            wheel_distance=0.070,
+            wheel_radius=0.034
         )
         self.start_device_manager({
             'robot': {'publish_base_footprint': True},

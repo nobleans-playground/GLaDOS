@@ -133,7 +133,7 @@ def generate_launch_description():
         package=package,
         executable=executable,
         parameters=[
-            node_parameters,
+            # node_parameters,
             {
                 'synchronization': synchronization,
                 'use_joint_state_publisher': publish_tf
