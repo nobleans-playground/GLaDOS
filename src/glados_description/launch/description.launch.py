@@ -35,15 +35,19 @@ ARGUMENTS = [
 
 def generate_launch_description():
 
-    base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
-    urdf_path = os.path.join(base_path, 'urdf')
-    proto_path = os.path.join(base_path, 'protos')
+    glados_description_path = os.path.realpath(get_package_share_directory('glados_description'))
+    glados_simulation_path = os.path.realpath(get_package_share_directory('glados_simulation'))
+    urdf_path = os.path.join(glados_description_path, 'urdf')
     xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
-    urdf_file = os.path.join(urdf_path, 'glados.urdf')
-    proto_file = os.path.join(proto_path, 'glados.proto')
-    rviz_file = os.path.join(base_path, 'config', 'default.rviz')
     assert os.path.exists(xacro_file), "glados.urdf.xacro doesn't exist in "+str(urdf_path)
+    urdf_file = os.path.join(urdf_path, 'glados.urdf')
 
+    proto_path = os.path.join(glados_simulation_path, 'protos')
+    proto_file = os.path.join(proto_path, 'glados.proto')
+
+    rviz_file = os.path.join(glados_description_path, 'config', 'default.rviz')
+
+    # Convert to URDF
     robot_description_xacro = xacro.process_file(xacro_file)
     robot_description_xml = robot_description_xacro.toxml()
 
@@ -51,10 +55,9 @@ def generate_launch_description():
     with open(urdf_file, 'w') as f:
         f.write(robot_description_xml)
 
+    # Convert to PROTO
     convert2urdf(urdf_file, proto_file, False, False, False, False, False, None, '0 1 0 0')
     # urdf2proto(--input=urdf_file)
-
-
 
 
     namespace = LaunchConfiguration('namespace')
