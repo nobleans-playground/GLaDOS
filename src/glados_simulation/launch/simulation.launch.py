@@ -162,7 +162,7 @@ def generate_launch_description():
     glados_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(glados_description_launch_file_path),
         launch_arguments={
-            'rviz': 'False',
+            'rviz': 'True',
             'use_sim_time': use_sim_time
         }.items()
     )

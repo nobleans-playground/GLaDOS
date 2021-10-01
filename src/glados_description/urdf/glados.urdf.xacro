@@ -3,6 +3,7 @@
   <xacro:property name="wheel_separation" value="0.070" />
   <xacro:property name="wheel_radius" value="0.034" />
   <xacro:property name="wheel_width" value="0.010" />
+  <xacro:property name="castor_radius" value="0.005" />
   <xacro:property name="body_height" value="0.1" />
   <xacro:property name="body_width" value="0.050" />
   <xacro:property name="body_length" value="0.035" />
@@ -82,6 +83,25 @@
     </inertial>
   </link>
 
+  <link name="castor">
+    <visual>
+      <geometry>
+        <sphere radius="${castor_radius}"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry>
+        <sphere radius="${castor_radius}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="1.75e-5" ixy="0.0" ixz="0.0" iyy="1.75e-5" iyz="0.0" izz="1.75e-5"/>
+    </inertial>
+  </link>
+
   <joint name="jointL" type="continuous">
     <parent link="base_link"/>
     <child link="wheelL"/>
@@ -95,6 +115,14 @@
     <child link="wheelR"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 -${body_width/2 + wheel_width/2} -${body_height/2 - 0.01}" rpy="${pi/2} 0 0" />
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <joint name="jointCastor" type="continuous">
+    <parent link="base_link"/>
+    <child link="castor"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="${body_length/2} 0 ${body_height*7/8 - body_height/2}" rpy="${pi/2} 0 0" />
     <dynamics friction="0.1"/>
   </joint>
 
