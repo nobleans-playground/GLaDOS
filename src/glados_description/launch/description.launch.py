@@ -78,6 +78,13 @@ def generate_launch_description():
         arguments = ["0", "0", "0", "0", "0", "0", "odom", "base_link"]
     )
 
+    footprint_publisher = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        output='screen',
+        arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -89,5 +96,6 @@ def generate_launch_description():
     return LaunchDescription(ARGUMENTS + [
         static_transform_publisher_odom,
         static_transform_publisher_base_link,
+        # footprint_publisher,
         rviz
     ])

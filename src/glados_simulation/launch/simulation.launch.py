@@ -17,8 +17,9 @@
 """Launch Webots GLaDOS Simulation."""
 
 import os
+# import pathlib
 import launch
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, Command
 from launch.substitutions.path_join_substitution import PathJoinSubstitution
 from launch.actions import DeclareLaunchArgument
 from launch.actions import RegisterEventHandler, EmitEvent, DeclareLaunchArgument
@@ -78,7 +79,7 @@ ARGUMENTS = [
     DeclareLaunchArgument(
         'node_parameters',
         description='Path to ROS parameters file that will be passed to the robot node',
-        default_value=os.path.join(package_path, 'param', 'ros2control.yml')
+        default_value=os.path.join(package_path, 'param', 'diff_drive_control.yml')
     ),
     DeclareLaunchArgument(
         'robot_name',
@@ -104,7 +105,9 @@ def generate_launch_description():
     base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
     urdf_path = os.path.join(base_path, 'urdf')
     xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
+    # urdf_xml = pathlib.Path(os.path.join(urdf_path, 'glados.urdf')).read_text()
 
+    diff_drive_control_params = os.path.join(package_path, 'param', 'diff_drive_control.yml')
 
     namespace = LaunchConfiguration('namespace')
 
@@ -128,21 +131,55 @@ def generate_launch_description():
         gui=gui
     )
 
-    # Driver node
-    controller = ControllerLauncher(
-        package=package,
-        executable=executable,
-        parameters=[
-            # node_parameters,
-            {
-                'synchronization': synchronization,
-                'use_joint_state_publisher': publish_tf
-            }],
+    controller_manager_timeout = ['--controller-manager-timeout', '50'] if os.name == 'nt' else []
+    controller_manager_prefix = 'python.exe' if os.name == 'nt' else "bash -c 'sleep 10; $0 $@' "
+
+    diffdrive_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
         output='screen',
-        arguments=[
-            '--webots-robot-name', robot_name,
-            '--webots-node-name', node_name
+        prefix=controller_manager_prefix,
+        arguments=['diffdrive_controller'] + controller_manager_timeout,
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        output='screen',
+        prefix=controller_manager_prefix,
+        arguments=['joint_state_broadcaster'] + controller_manager_timeout,
+    )
+
+    # Driver node
+    # controller = ControllerLauncher(
+    #     package=package,
+    #     executable=executable,
+    #     parameters=[
+    #         # node_parameters,
+    #         {
+    #             'synchronization': synchronization,
+    #             'use_joint_state_publisher': publish_tf
+    #         }],
+    #     output='screen',
+    #     arguments=[
+    #         '--webots-robot-name', robot_name,
+    #         '--webots-node-name', node_name
+    #     ],
+    # )
+
+    controller = Node(
+        package='webots_ros2_driver',
+        executable='driver',
+        output='screen',
+        parameters=[
+            {'robot_description': Command(['xacro ', xacro_file]),
+            # {'robot_description': urdf_xml,
+             'use_sim_time': use_sim_time},
+            diff_drive_control_params
         ],
+        remappings=[
+            ('/diffdrive_controller/cmd_vel_unstamped', '/cmd_vel')
+        ]
     )
 
     # Robot state publisher
@@ -162,7 +199,7 @@ def generate_launch_description():
     glados_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(glados_description_launch_file_path),
         launch_arguments={
-            'rviz': 'True',
+            'rviz': 'False',
             'use_sim_time': use_sim_time
         }.items()
     )
@@ -170,6 +207,8 @@ def generate_launch_description():
 
     return LaunchDescription(ARGUMENTS + [
         webots,
+        diffdrive_controller_spawner,
+        joint_state_broadcaster_spawner,
         controller,
         robot_state_publisher,
         glados_description,

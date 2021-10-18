@@ -55,8 +55,6 @@ install(DIRECTORY
 # Install Webots files.
 install(DIRECTORY
   worlds
-  # protos
-  # resource
   param
   DESTINATION share/${PROJECT_NAME}/
 )

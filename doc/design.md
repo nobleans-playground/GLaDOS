@@ -8,4 +8,4 @@
 
 
 
-- How does the `robot_state_publisher` with an empty robot fill the `/robot_description` topic with the webots URDF? Via parameter server, which it then publishes as a topic once? -> `robot_device.py` is responsible for this, -> `device_manager.py`, -> `webots_node.py` -> `webots_differential_drive_node.py`
+- How does the `robot_state_publisher` with an empty robot fill the `/robot_description` topic with the webots URDF? -> `robot_device.py` is responsible for this, -> `device_manager.py`, -> `webots_node.py` -> `webots_differential_drive_node.py`
