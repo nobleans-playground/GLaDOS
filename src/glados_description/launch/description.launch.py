@@ -62,23 +62,9 @@ def generate_launch_description():
 
     namespace = LaunchConfiguration('namespace')
     rviz = LaunchConfiguration('rviz')
-    robot_state_publisher = LaunchConfiguration('robot_state_publisher')
     static_transform_publisher_odom = LaunchConfiguration('static_transform_publisher')
     static_transform_publisher_base_link = LaunchConfiguration('static_transform_publisher')
-    joint_state_publisher = LaunchConfiguration('joint_state_publisher')
     use_sim_time = LaunchConfiguration('use_sim_time')
-
-    # robot_state_publisher = Node(
-    #     package='robot_state_publisher',
-    #     executable='robot_state_publisher',
-    #     output='screen',
-    #     parameters=[{
-    #         'robot_description': Command(['xacro ', xacro_file]),
-    #         # 'robot_description': robot_description_xml,
-    #         'use_sim_time': use_sim_time
-    #     }],
-    #     # condition=launch.conditions.IfCondition(publish_tf)
-    # )
 
     static_transform_publisher_odom = Node(
         package = "tf2_ros",
@@ -92,11 +78,6 @@ def generate_launch_description():
         arguments = ["0", "0", "0", "0", "0", "0", "odom", "base_link"]
     )
 
-    # joint_state_publisher = Node(
-    #     package = 'joint_state_publisher',
-    #     executable = 'joint_state_publisher'
-    # )
-
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -106,9 +87,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription(ARGUMENTS + [
-        # robot_state_publisher,
         static_transform_publisher_odom,
         static_transform_publisher_base_link,
-        # joint_state_publisher,
         rviz
     ])

@@ -1,6 +1,5 @@
 # Install Webots
-`sudo apt install ros-$ROS_DISTRO-webots-ros2`\
-make sure you are in point 4. of https://github.com/cyberbotics/webots_ros2/wiki/Build-and-Install.
+make sure you are in point 4. of https://github.com/cyberbotics/webots_ros2/wiki/Build-and-Install and install.
 
 Now, if Webots is not installed (or not the right version), when launching the node, a pop-up window will ask the user if he wants to install Webots, if he says yes, the tarball is downloaded and installed in $HOME/.ros/webots$VERSION, I have checked but did not found any recommended location to save such files (some other packages such RVIz2 are creating their own hidden folder in the home directory). [Source](https://github.com/cyberbotics/webots_ros2/pull/141#issuecomment-694158287).
 
