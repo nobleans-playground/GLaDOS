@@ -1,8 +1,10 @@
 # TODO
 currently working on:
 ## Box on wheels
+- rviz [] empty frame transformation does not exist due to empty robot state publisher?
+- [rviz2-8] Warning: Invalid frame ID "wheelL" passed to canTransform argument source_frame - frame does not exist
 - Add a caster.
-- open rviz as well.
+- Strange control behavior, cannot steer properly and also not forward and backwards.
 - `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
 - clean-up launch files, example: https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/blob/master/src/drivers/lgsvl_interface/launch/lgsvl_vehicle_control_command.launch.py
 - Split `glados_simulation` over `glados`, `glados_description` and `glados_simulation` packages.
