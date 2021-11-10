@@ -1,4 +1,4 @@
-#VRML_SIM R2021a utf8
+#VRML_SIM R2021b utf8
 WorldInfo {
   info [
     "Simple GLaDOS simulation that can be controlled by a ROS."
@@ -39,10 +39,6 @@ CardboardBox {
 DirectionPanel {
   translation -1.21 0.56996 0.200113
   rotation 0.5773879333287305 0.577273933341894 0.5773889333286151 2.09451
-  textSize 0.175
-  text "Fresh beer :)"
-  right FALSE
-  left TRUE
 }
 RectangleArena {
   rotation 1 0 0 1.570796327
