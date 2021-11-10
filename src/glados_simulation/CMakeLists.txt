@@ -56,6 +56,7 @@ install(DIRECTORY
 install(DIRECTORY
   worlds
   param
+  resource
   DESTINATION share/${PROJECT_NAME}/
 )
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<robot name="glados">
+    <webots>
+        <plugin type="webots_ros2_control::Ros2Control" />
+    </webots>
+
+    <ros2_control name="WebotsControl" type="system">
+        <hardware>
+            <plugin>webots_ros2_control::Ros2ControlSystem</plugin>
+        </hardware>
+        <joint name="jointL">
+            <state_interface name="position"/>
+            <command_interface name="velocity"/>
+        </joint>
+        <joint name="jointR">
+            <state_interface name="position"/>
+            <command_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+</robot>

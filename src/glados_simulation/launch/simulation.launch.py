@@ -17,7 +17,7 @@
 """Launch Webots GLaDOS Simulation."""
 
 import os
-# import pathlib
+import pathlib
 import launch
 from launch.substitutions import LaunchConfiguration, Command
 from launch.substitutions.path_join_substitution import PathJoinSubstitution
@@ -105,7 +105,9 @@ def generate_launch_description():
     base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
     urdf_path = os.path.join(base_path, 'urdf')
     xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
-    # urdf_xml = pathlib.Path(os.path.join(urdf_path, 'glados.urdf')).read_text()
+
+    simulation_dir = get_package_share_directory('glados_simulation')
+    webots_description = pathlib.Path(os.path.join(simulation_dir, 'resource', 'glados_webots.urdf')).read_text()
 
     diff_drive_control_params = os.path.join(package_path, 'param', 'diff_drive_control.yml')
 
@@ -172,8 +174,7 @@ def generate_launch_description():
         executable='driver',
         output='screen',
         parameters=[
-            {'robot_description': Command(['xacro ', xacro_file]),
-            # {'robot_description': urdf_xml,
+            {'robot_description': webots_description,
              'use_sim_time': use_sim_time},
             diff_drive_control_params
         ],
@@ -199,7 +200,7 @@ def generate_launch_description():
     glados_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(glados_description_launch_file_path),
         launch_arguments={
-            'rviz': 'False',
+            'rviz': 'True',
             'use_sim_time': use_sim_time
         }.items()
     )
