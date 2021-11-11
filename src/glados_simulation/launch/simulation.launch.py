@@ -102,14 +102,14 @@ def get_share_file(package_name, file_name):
     return os.path.join(get_package_share_directory(package_name), file_name)
 
 def generate_launch_description():
-    base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
-    urdf_path = os.path.join(base_path, 'urdf')
-    xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
+    # base_path = os.path.realpath(get_package_share_directory('glados_description')) # also tried without realpath
+    # urdf_path = os.path.join(base_path, 'urdf')
+    # xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
 
     simulation_dir = get_package_share_directory('glados_simulation')
     webots_description = pathlib.Path(os.path.join(simulation_dir, 'resource', 'glados_webots.urdf')).read_text()
 
-    diff_drive_control_params = os.path.join(package_path, 'param', 'diff_drive_control.yml')
+    diff_drive_control_params = os.path.join(package_path, 'param', 'ros2control.yml')
 
     namespace = LaunchConfiguration('namespace')
 
@@ -189,7 +189,7 @@ def generate_launch_description():
         executable='robot_state_publisher',
         output='screen',
         parameters=[{
-            'robot_description': '<robot name=""><link name=""/></robot>',
+            'robot_description': '<robot name=""><link name="base_link"/></robot>',
             'use_sim_time': use_sim_time
         }],
         condition=launch.conditions.IfCondition(publish_tf)

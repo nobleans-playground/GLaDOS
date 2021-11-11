@@ -8,26 +8,6 @@
   <xacro:property name="body_width" value="0.050" />
   <xacro:property name="body_length" value="0.035" />
 
-  <!-- <gazebo reference="base_link">
-    <material>Gazebo/White</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-
-  <gazebo reference="wheelR">
-    <material>Gazebo/Red</material>
-    <mu1>0.84</mu1>
-    <mu2>0.84</mu2>
-  </gazebo>
-
-  <gazebo reference="wheelL">
-    <material>Gazebo/Blue</material>
-    <mu1>0.84</mu1>
-    <mu2>0.84</mu2>
-  </gazebo> -->
-
-  <!-- <link name="base_footprint"/>
-
   <joint name="base_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
@@ -133,8 +113,4 @@
     <origin xyz="${body_length/2} 0 ${body_height*7/8 - body_height/2}" rpy="${pi/2} 0 0" />
     <dynamics friction="0.1"/>
   </joint> -->
-
-  <!-- <gazebo>
-    <plugin name="wb_plugin" filename="libwb_plugin.so"> </plugin>
-  </gazebo> -->
 </robot>
