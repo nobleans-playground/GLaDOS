@@ -1,15 +1,12 @@
 # TODO
 currently working on:
 ## Box on wheels
-- Robleo sim and robleo in my sim gives the same strange teleop control responses. However, better than glados.
-- Strange control behavior, cannot steer properly and also not forward and backwards.
+- Turning the robot goes the wrong way
 - `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
 - Add a caster.
 - clean-up launch files, example: https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/blob/master/src/drivers/lgsvl_interface/launch/lgsvl_vehicle_control_command.launch.py
 - Split `glados_simulation` over `glados`, `glados_description` and `glados_simulation` packages.
 - Split urdf.xacro parts
-
-## upgrade to webots R2021b
 
 ## ROS2 Controller in CPP for webots
 - understand ROS2 control framework in combination with webots: `driver_node` and `robot state_publisher`

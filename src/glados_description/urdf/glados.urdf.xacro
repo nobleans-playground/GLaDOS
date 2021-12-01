@@ -23,11 +23,11 @@
       </geometry>
     </visual>
 
-    <collision>
+    <!-- <collision>
       <geometry>
         <box size="${body_length} ${body_width} ${body_height}"/>
       </geometry>
-    </collision>
+    </collision> -->
 
     <inertial>
       <mass value="0.18"/>
