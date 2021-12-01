@@ -4,9 +4,9 @@
   <xacro:property name="wheel_radius" value="0.034" />
   <xacro:property name="wheel_width" value="0.010" />
   <xacro:property name="castor_radius" value="0.005" />
-  <xacro:property name="body_height" value="0.1" />
-  <xacro:property name="body_width" value="0.050" />
-  <xacro:property name="body_length" value="0.035" />
+  <xacro:property name="body_height" value="0.05" />
+  <xacro:property name="body_width" value="0.05" />
+  <xacro:property name="body_length" value="0.1" />
 
   <!-- <link name="base_footprint"/>
 
@@ -23,11 +23,11 @@
       </geometry>
     </visual>
 
-    <!-- <collision>
+    <collision>
       <geometry>
         <box size="${body_length} ${body_width} ${body_height}"/>
       </geometry>
-    </collision> -->
+    </collision>
 
     <inertial>
       <mass value="0.18"/>
@@ -96,7 +96,7 @@
     <parent link="base_link"/>
     <child link="wheelL"/>
     <axis xyz="0 0 1"/>
-    <origin xyz="0 ${body_width/2 + wheel_width/2} -${body_height/2 - 0.01}" rpy="${pi/2} 0 0" />
+    <origin xyz="0 ${body_width/2 + wheel_width/2} 0" rpy="-${pi/2} 0 0" />
     <dynamics friction="0.1"/>
   </joint>
 
@@ -104,7 +104,7 @@
     <parent link="base_link"/>
     <child link="wheelR"/>
     <axis xyz="0 0 1"/>
-    <origin xyz="0 -${body_width/2 + wheel_width/2} -${body_height/2 - 0.01}" rpy="${pi/2} 0 0" />
+    <origin xyz="0 -${body_width/2 + wheel_width/2} 0" rpy="-${pi/2} 0 0" />
     <dynamics friction="0.1"/>
   </joint>
 

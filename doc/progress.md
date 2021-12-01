@@ -1,7 +1,7 @@
 # TODO
 currently working on:
 ## Box on wheels
-- Turning the robot goes the wrong way
+- Body isn't visualized
 - `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
 - Add a caster.
 - clean-up launch files, example: https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/blob/master/src/drivers/lgsvl_interface/launch/lgsvl_vehicle_control_command.launch.py

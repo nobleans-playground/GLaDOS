@@ -56,7 +56,7 @@ def generate_launch_description():
         f.write(robot_description_xml)
 
     # Convert to PROTO
-    convert2urdf(urdf_file, proto_file, False, False, False, False, False, None, '0 1 0 0')
+    convert2urdf(urdf_file, proto_file, False, False, False, False, False, None, '0 0 0 0') # rotation is axis-angle pair and not quaternion: pi rotation around z-axis (0 0 1 3.1416)
     # urdf2proto(--input=urdf_file)
 
 

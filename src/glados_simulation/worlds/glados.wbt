@@ -15,7 +15,7 @@ TexturedBackground {
 }
 glados {
   translation 0 0 0.1
-  rotation 0 0 0 1
+  rotation 0 0 1 3.1416 # axis-angle
   controller "<extern>"
   controllerArgs [
     ""
