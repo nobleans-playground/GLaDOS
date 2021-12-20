@@ -108,8 +108,10 @@ def generate_launch_description():
 
     simulation_dir = get_package_share_directory('glados_simulation')
     webots_description = pathlib.Path(os.path.join(simulation_dir, 'resource', 'glados_webots.urdf')).read_text()
+    # webots_description = pathlib.Path(os.path.join(simulation_dir, 'resource', 'robleo_webots.urdf')).read_text()
 
     diff_drive_control_params = os.path.join(package_path, 'param', 'diff_drive_control.yml')
+    # diff_drive_control_params = os.path.join(package_path, 'param', 'ros2control_robleo.yml')
 
     namespace = LaunchConfiguration('namespace')
 
@@ -129,6 +131,7 @@ def generate_launch_description():
     # Webots
     webots = WebotsLauncher(
         world=world,
+        # world=os.path.join(package_path, 'worlds', 'robleo.wbt'),
         mode=mode,
         gui=gui
     )

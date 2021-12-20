@@ -1,0 +1,39 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  info [
+    "Simple GLaDOS simulation that can be controlled by a ROS."
+  ]
+  title "ROS2 simulation of the GLaDOS robot"
+}
+Viewpoint {
+  orientation 0.5342254303237617 0.5445843034611193 0.6465532661886096 2.0111391074766947
+  position 2.359183666062696 0.0704252256104689 0.40745749713236384
+}
+TexturedBackground {
+  texture "empty_office"
+  skybox FALSE
+}
+robleo {
+translation 0 0 0.1
+  rotation 0 0 1 3.1416 # axis-angle
+  controller "<extern>"
+  controllerArgs [
+    ""
+  ]
+}
+CardboardBox {
+  translation -1.11457 -1.07496 0.0999216
+  rotation 0.8628457252773426 0.3574193865537854 0.3574194125759432 1.717783485125655
+  name "cardboard box(3)"
+  size 0.2 0.2 0.2
+  mass 0.2
+}
+DirectionPanel {
+  translation -1.21 0.56996 0.200113
+  rotation 0.5773879333287305 0.577273933341894 0.5773889333286151 2.09451
+}
+RectangleArena {
+  rotation 1 0 0 1.570796327
+  floorSize 3 3
+}
+

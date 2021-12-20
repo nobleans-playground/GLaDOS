@@ -35,15 +35,19 @@ ARGUMENTS = [
 
 def generate_launch_description():
 
+    namespace = LaunchConfiguration('namespace')
+    name = 'glados'
+    # name = 'robleo'
+
     glados_description_path = os.path.realpath(get_package_share_directory('glados_description'))
     glados_simulation_path = os.path.realpath(get_package_share_directory('glados_simulation'))
     urdf_path = os.path.join(glados_description_path, 'urdf')
-    xacro_file = os.path.join(urdf_path, 'glados.urdf.xacro')
-    assert os.path.exists(xacro_file), "glados.urdf.xacro doesn't exist in "+str(urdf_path)
-    urdf_file = os.path.join(urdf_path, 'glados.urdf')
+    xacro_file = os.path.join(urdf_path, name+'.urdf.xacro')
+    assert os.path.exists(xacro_file), name+".urdf.xacro doesn't exist in "+str(urdf_path)
+    urdf_file = os.path.join(urdf_path, name+'.urdf')
 
     proto_path = os.path.join(glados_simulation_path, 'protos')
-    proto_file = os.path.join(proto_path, 'glados.proto')
+    proto_file = os.path.join(proto_path, name+'.proto')
 
     rviz_file = os.path.join(glados_description_path, 'config', 'default.rviz')
 
