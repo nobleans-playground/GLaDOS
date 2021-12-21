@@ -3,7 +3,7 @@ currently working on:
 ## Box on wheels
 - Body isn't visualized in rviz
     - cilinder works, still looking for the bug in URDF/rviz why it isn't visualized. Locale issue for size<1 is not the problem.
-    - with robot state publisher it does show the box correctly, so it is not an rviz or urdf problem, however, webots somehow publishes onto the /robot_description topic, so something might get lost in translation to proto and back to urdf?
+    - URDF -> proto -> webots -> URDF -> description topic. description topic shows that after conversion back to URDF the baselink is empty when using box and functioning normally for cylinder.
 - `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
 - Add a caster.
 - clean-up launch files, example: https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/blob/master/src/drivers/lgsvl_interface/launch/lgsvl_vehicle_control_command.launch.py

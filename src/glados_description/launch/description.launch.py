@@ -35,6 +35,10 @@ ARGUMENTS = [
 
 def generate_launch_description():
 
+    # Hack to solve rviz not rendering cylinders
+    # (https://answers.ros.org/question/374069/rviz2-only-render-boxes/)
+    os.environ["LC_NUMERIC"] = "en_US.UTF-8"
+
     namespace = LaunchConfiguration('namespace')
     name = 'glados'
     # name = 'robleo'
@@ -89,6 +93,18 @@ def generate_launch_description():
         arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
     )
 
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen',
+        parameters=[{
+            'robot_description': Command(['xacro ', xacro_file]),
+            # 'robot_description': robot_description_xml,
+            'use_sim_time': use_sim_time
+        }],
+        # condition=launch.conditions.IfCondition(publish_tf)
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -100,6 +116,7 @@ def generate_launch_description():
     return LaunchDescription(ARGUMENTS + [
         static_transform_publisher_odom,
         static_transform_publisher_base_link,
+        # robot_state_publisher,
         # footprint_publisher,
         rviz
     ])

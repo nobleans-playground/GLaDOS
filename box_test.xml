@@ -1,0 +1,47 @@
+<?xml version=\"1.0\"?>
+<robot name=\"glados\" xmlns:xacro=\"http://ros.org/wiki/xacro\">
+  <link name=\"base_link\">
+  </link>
+  <joint name=\"jointR\" type=\"continuous\">
+    <parent link=\"base_link\"/>
+    <child link=\"wheelR\"/>
+    <axis xyz=\"0 0 1\"/>
+    <limit effort=\"10000\" velocity=\"10\"/>
+    <origin xyz=\"0 -0.03 0\" rpy=\"-1.570796 0 0\"/>
+  </joint>
+  <link name=\"wheelR\">
+    <visual>
+      <origin xyz=\"0 0 0\" rpy=\"3.141592 0 0\"/>
+      <geometry>
+        <cylinder radius=\"0.034\" length=\"0.01\"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz=\"0 0 0\" rpy=\"3.141592 0 0\"/>
+      <geometry>
+        <cylinder radius=\"0.034\" length=\"0.01\"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name=\"jointL\" type=\"continuous\">
+    <parent link=\"base_link\"/>
+    <child link=\"wheelL\"/>
+    <axis xyz=\"0 0 1\"/>
+    <limit effort=\"10000\" velocity=\"10\"/>
+    <origin xyz=\"0 0.03 0\" rpy=\"-1.570796 0 0\"/>
+  </joint>
+  <link name=\"wheelL\">
+    <visual>
+      <origin xyz=\"0 0 0\" rpy=\"3.141592 0 0\"/>
+      <geometry>
+        <cylinder radius=\"0.034\" length=\"0.01\"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz=\"0 0 0\" rpy=\"3.141592 0 0\"/>
+      <geometry>
+        <cylinder radius=\"0.034\" length=\"0.01\"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
