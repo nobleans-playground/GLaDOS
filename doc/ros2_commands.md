@@ -1,3 +1,10 @@
+# ROS2 Foxy -> Galactic
+`sudo apt purge ros-foxy* && sudo apt autoremove`
+
+https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
+
+`sudo apt install ros-galactic-webots-ros2`
+
 # Install Webots
 make sure you are in point 4. of https://github.com/cyberbotics/webots_ros2/wiki/Build-and-Install and install.
 
@@ -58,3 +65,10 @@ No auto-complete even with supporting package. (source first?)\
 
 # Limit ROS2 to localhost only (turns off automatic node network discovery)
 Add to ~/.bashrc: `export ROS_LOCALHOST_ONLY=1`
+
+# Silver searcher
+sudo apt install silversearcher-ag
+
+# Fancy Ctrl+R
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install

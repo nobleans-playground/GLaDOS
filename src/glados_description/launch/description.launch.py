@@ -7,6 +7,9 @@ from launch.actions import DeclareLaunchArgument
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
 from urdf2webots.importer import convert2urdf
 # from webots_ros2_importer import urdf2proto
 
@@ -14,6 +17,9 @@ from ament_index_python.packages import get_package_share_directory
 from ament_index_python.packages import get_package_prefix
 
 import xacro
+
+def get_share_file(package_name, file_name):
+    return os.path.join(get_package_share_directory(package_name), file_name)
 
 ARGUMENTS = [
     DeclareLaunchArgument(
@@ -53,7 +59,7 @@ def generate_launch_description():
     proto_path = os.path.join(glados_simulation_path, 'protos')
     proto_file = os.path.join(proto_path, name+'.proto')
 
-    rviz_file = os.path.join(glados_description_path, 'config', 'default.rviz')
+    # rviz_file = os.path.join(glados_description_path, 'config', 'default.rviz')
 
     # Convert to URDF
     robot_description_xacro = xacro.process_file(xacro_file)
@@ -66,6 +72,10 @@ def generate_launch_description():
     # Convert to PROTO
     convert2urdf(urdf_file, proto_file, False, False, False, False, False, None, '0 0 0 0') # rotation is axis-angle pair and not quaternion: pi rotation around z-axis (0 0 1 3.1416)
     # urdf2proto(--input=urdf_file)
+
+
+
+
 
 
     namespace = LaunchConfiguration('namespace')
@@ -86,37 +96,44 @@ def generate_launch_description():
         arguments = ["0", "0", "0", "0", "0", "0", "odom", "base_link"]
     )
 
-    footprint_publisher = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        output='screen',
-        arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
-    )
+    # footprint_publisher = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     output='screen',
+    #     arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
+    # )
 
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'robot_description': Command(['xacro ', xacro_file]),
-            # 'robot_description': robot_description_xml,
-            'use_sim_time': use_sim_time
-        }],
-        # condition=launch.conditions.IfCondition(publish_tf)
-    )
+    # robot_state_publisher = Node(
+    #     package='robot_state_publisher',
+    #     executable='robot_state_publisher',
+    #     output='screen',
+    #     parameters=[{
+    #         'robot_description': Command(['xacro ', xacro_file]),
+    #         # 'robot_description': robot_description_xml,
+    #         'use_sim_time': use_sim_time
+    #     }],
+    #     # condition=launch.conditions.IfCondition(publish_tf)
+    # )
 
-    rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        output='screen',
-        arguments=['-d', str(rviz_file)],
-        condition=launch.conditions.IfCondition(rviz)
-    )
+    # rviz = Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     output='screen',
+    #     arguments=['-d', str(rviz_file)],
+    #     condition=launch.conditions.IfCondition(rviz)
+    # )
+
+    # Execute/Import glados_description launch file
+    if launch.conditions.IfCondition(rviz):
+        rviz_launch_file_path = get_share_file('glados_description', 'launch/rviz.launch.py')
+        rviz_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(rviz_launch_file_path),
+        )
 
     return LaunchDescription(ARGUMENTS + [
         static_transform_publisher_odom,
         static_transform_publisher_base_link,
         # robot_state_publisher,
         # footprint_publisher,
-        rviz
+        rviz_launch
     ])

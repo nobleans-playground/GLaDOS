@@ -141,7 +141,7 @@ def generate_launch_description():
 
     diffdrive_controller_spawner = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         output='screen',
         prefix=controller_manager_prefix,
         arguments=['diffdrive_controller'] + controller_manager_timeout,
@@ -149,7 +149,7 @@ def generate_launch_description():
 
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         output='screen',
         prefix=controller_manager_prefix,
         arguments=['joint_state_broadcaster'] + controller_manager_timeout,
@@ -187,16 +187,16 @@ def generate_launch_description():
     )
 
     # Robot state publisher
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'robot_description': '<robot name=""><link name="base_link"/></robot>',
-            'use_sim_time': use_sim_time
-        }],
-        condition=launch.conditions.IfCondition(publish_tf)
-    )
+    # robot_state_publisher = Node(
+    #     package='robot_state_publisher',
+    #     executable='robot_state_publisher',
+    #     output='screen',
+    #     parameters=[{
+    #         'robot_description': '<robot name=""><link name="base_link"/></robot>',
+    #         'use_sim_time': use_sim_time
+    #     }],
+    #     condition=launch.conditions.IfCondition(publish_tf)
+    # )
 
     # Execute/Import glados_description launch file
     glados_description_launch_file_path = get_share_file('glados_description', 'launch/description.launch.py')
@@ -214,7 +214,7 @@ def generate_launch_description():
         diffdrive_controller_spawner,
         joint_state_broadcaster_spawner,
         controller,
-        robot_state_publisher,
+        # robot_state_publisher,
         glados_description,
 
         # Shutdown launch when Webots exits.
