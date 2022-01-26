@@ -75,9 +75,6 @@ def generate_launch_description():
 
 
 
-
-
-
     namespace = LaunchConfiguration('namespace')
     rviz = LaunchConfiguration('rviz')
     static_transform_publisher_odom = LaunchConfiguration('static_transform_publisher')
@@ -95,33 +92,6 @@ def generate_launch_description():
         executable = "static_transform_publisher",
         arguments = ["0", "0", "0", "0", "0", "0", "odom", "base_link"]
     )
-
-    # footprint_publisher = Node(
-    #     package='tf2_ros',
-    #     executable='static_transform_publisher',
-    #     output='screen',
-    #     arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
-    # )
-
-    # robot_state_publisher = Node(
-    #     package='robot_state_publisher',
-    #     executable='robot_state_publisher',
-    #     output='screen',
-    #     parameters=[{
-    #         'robot_description': Command(['xacro ', xacro_file]),
-    #         # 'robot_description': robot_description_xml,
-    #         'use_sim_time': use_sim_time
-    #     }],
-    #     # condition=launch.conditions.IfCondition(publish_tf)
-    # )
-
-    # rviz = Node(
-    #     package='rviz2',
-    #     executable='rviz2',
-    #     output='screen',
-    #     arguments=['-d', str(rviz_file)],
-    #     condition=launch.conditions.IfCondition(rviz)
-    # )
 
     # Execute/Import glados_description launch file
     if launch.conditions.IfCondition(rviz):

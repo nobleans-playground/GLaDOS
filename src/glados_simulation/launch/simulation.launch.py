@@ -186,18 +186,6 @@ def generate_launch_description():
         ]
     )
 
-    # Robot state publisher
-    # robot_state_publisher = Node(
-    #     package='robot_state_publisher',
-    #     executable='robot_state_publisher',
-    #     output='screen',
-    #     parameters=[{
-    #         'robot_description': '<robot name=""><link name="base_link"/></robot>',
-    #         'use_sim_time': use_sim_time
-    #     }],
-    #     condition=launch.conditions.IfCondition(publish_tf)
-    # )
-
     # Execute/Import glados_description launch file
     glados_description_launch_file_path = get_share_file('glados_description', 'launch/description.launch.py')
     glados_description = IncludeLaunchDescription(
