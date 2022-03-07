@@ -1,7 +1,8 @@
 # TODO
 currently working on:
 ## Box on wheels
-- `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
+- Fixing `sudo apt upgrade` (webots 2022a + webots driver changes), fixed almost, but seems like I have two joint_state_publishers (see rviz). So perhaps webots also publishing using a different coordinate frame?
+- Ros2 control: `glados_driver.py` seems to be the only controller needed to make everything function, so why is there a mirrored ros diff driver controller in the yaml file? -> see firefox open tabs
 - Add a caster.
 - clean-up launch files, example: https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/blob/master/src/drivers/lgsvl_interface/launch/lgsvl_vehicle_control_command.launch.py
 - Split `glados_simulation` over `glados`, `glados_description` and `glados_simulation` packages.

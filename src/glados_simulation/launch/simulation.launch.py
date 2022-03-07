@@ -139,6 +139,7 @@ def generate_launch_description():
     controller_manager_timeout = ['--controller-manager-timeout', '50'] if os.name == 'nt' else []
     controller_manager_prefix = 'python.exe' if os.name == 'nt' else "bash -c 'sleep 10; $0 $@' "
 
+# The controller_manager/spawner, spawns controllers and if a manager does not exist yet, it will also be spawned.
     diffdrive_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
@@ -191,7 +192,7 @@ def generate_launch_description():
     glados_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(glados_description_launch_file_path),
         launch_arguments={
-            'rviz': 'True',
+            'rviz': 'False',
             'use_sim_time': use_sim_time
         }.items()
     )
